@@ -1,0 +1,32 @@
+syntax = "proto3";
+package purchase;
+
+option go_package = "./purchasev1";
+
+service PurchaseService {
+    rpc SavePurchaseTransaction(SavePurchaseRequest) returns (GetPurchaseResponse);
+    rpc GetPurchaseTransaction(GetPurchaseRequest) returns (GetPurchaseResponse);
+}
+
+message SavePurchaseRequest {
+    string description = 1;
+    Date transaction_date = 2;
+    int32 amount = 3; // the amount unit is in cents not dollars
+}
+
+message GetPurchaseRequest {
+    string id = 1;
+}
+
+message GetPurchaseResponse {
+    string description = 1;
+    Date transaction_date = 2;
+    int32 amount = 3; // the amount unit is in cents not dollars
+    string id = 4;
+}
+
+message Date {
+    int32 year = 1;
+    int32 month = 2;
+    int32 day = 3;
+}
