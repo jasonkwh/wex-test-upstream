@@ -28,7 +28,7 @@ message GetPurchaseResponse {
     Date transaction_date = 2;
     float amount = 3;
     string id = 4;
-    float exchange_rate = 5;
+    string exchange_rate = 5;
     float converted_amount = 6;
 }
 
