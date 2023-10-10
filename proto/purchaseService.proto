@@ -4,25 +4,32 @@ package purchase;
 option go_package = "./purchasev1";
 
 service PurchaseService {
-    rpc SavePurchaseTransaction(SavePurchaseRequest) returns (GetPurchaseResponse);
+    rpc SavePurchaseTransaction(SavePurchaseRequest) returns (SavePurchaseResponse);
     rpc GetPurchaseTransaction(GetPurchaseRequest) returns (GetPurchaseResponse);
 }
 
 message SavePurchaseRequest {
     string description = 1;
     Date transaction_date = 2;
-    int32 amount = 3; // the amount unit is in cents not dollars
+    float amount = 3;
+}
+
+message SavePurchaseResponse {
+    string id = 1;
 }
 
 message GetPurchaseRequest {
     string id = 1;
+    string currency = 2;
 }
 
 message GetPurchaseResponse {
     string description = 1;
     Date transaction_date = 2;
-    int32 amount = 3; // the amount unit is in cents not dollars
+    float amount = 3;
     string id = 4;
+    string exchange_rate = 5;
+    float converted_amount = 6;
 }
 
 message Date {

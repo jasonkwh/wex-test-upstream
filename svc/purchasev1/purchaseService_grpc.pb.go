@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PurchaseServiceClient interface {
-	SavePurchaseTransaction(ctx context.Context, in *SavePurchaseRequest, opts ...grpc.CallOption) (*GetPurchaseResponse, error)
+	SavePurchaseTransaction(ctx context.Context, in *SavePurchaseRequest, opts ...grpc.CallOption) (*SavePurchaseResponse, error)
 	GetPurchaseTransaction(ctx context.Context, in *GetPurchaseRequest, opts ...grpc.CallOption) (*GetPurchaseResponse, error)
 }
 
@@ -39,8 +39,8 @@ func NewPurchaseServiceClient(cc grpc.ClientConnInterface) PurchaseServiceClient
 	return &purchaseServiceClient{cc}
 }
 
-func (c *purchaseServiceClient) SavePurchaseTransaction(ctx context.Context, in *SavePurchaseRequest, opts ...grpc.CallOption) (*GetPurchaseResponse, error) {
-	out := new(GetPurchaseResponse)
+func (c *purchaseServiceClient) SavePurchaseTransaction(ctx context.Context, in *SavePurchaseRequest, opts ...grpc.CallOption) (*SavePurchaseResponse, error) {
+	out := new(SavePurchaseResponse)
 	err := c.cc.Invoke(ctx, PurchaseService_SavePurchaseTransaction_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -61,7 +61,7 @@ func (c *purchaseServiceClient) GetPurchaseTransaction(ctx context.Context, in *
 // All implementations must embed UnimplementedPurchaseServiceServer
 // for forward compatibility
 type PurchaseServiceServer interface {
-	SavePurchaseTransaction(context.Context, *SavePurchaseRequest) (*GetPurchaseResponse, error)
+	SavePurchaseTransaction(context.Context, *SavePurchaseRequest) (*SavePurchaseResponse, error)
 	GetPurchaseTransaction(context.Context, *GetPurchaseRequest) (*GetPurchaseResponse, error)
 	mustEmbedUnimplementedPurchaseServiceServer()
 }
@@ -70,7 +70,7 @@ type PurchaseServiceServer interface {
 type UnimplementedPurchaseServiceServer struct {
 }
 
-func (UnimplementedPurchaseServiceServer) SavePurchaseTransaction(context.Context, *SavePurchaseRequest) (*GetPurchaseResponse, error) {
+func (UnimplementedPurchaseServiceServer) SavePurchaseTransaction(context.Context, *SavePurchaseRequest) (*SavePurchaseResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SavePurchaseTransaction not implemented")
 }
 func (UnimplementedPurchaseServiceServer) GetPurchaseTransaction(context.Context, *GetPurchaseRequest) (*GetPurchaseResponse, error) {
