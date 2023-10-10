@@ -11,7 +11,7 @@ service PurchaseService {
 message SavePurchaseRequest {
     string description = 1;
     Date transaction_date = 2;
-    float amount = 3;
+    string amount = 3;
 }
 
 message SavePurchaseResponse {
@@ -26,10 +26,10 @@ message GetPurchaseRequest {
 message GetPurchaseResponse {
     string description = 1;
     Date transaction_date = 2;
-    float amount = 3;
+    string amount = 3;
     string id = 4;
     string exchange_rate = 5;
-    float converted_amount = 6;
+    string converted_amount = 6;
 }
 
 message Date {
